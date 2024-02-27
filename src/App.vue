@@ -38,6 +38,12 @@ function deleteTask(removeTaskId) {
   tasks.value = tasks.value.filter((task) => task.id !== removeTaskId)
 }
 
+function toggleReminder(id) {
+  tasks.value = tasks.value.map((task) =>
+    task.id === id ? { ...task, reminder: !task.reminder } : task
+  )
+}
+
 const onSubmit = () => {
   if (!newTask.value.text) {
     alert('Please add a task')
@@ -79,7 +85,7 @@ const onSubmit = () => {
           v-for="task in tasks"
           :key="task.id"
           :class="task.reminder ? 'reminder' : ''"
-          @dblclick="() => (task.reminder = !task.reminder)"
+          @dblclick="() => (toggleReminder(task.id))"
         >
           <div>
             <h3>{{ task.text }}</h3>
