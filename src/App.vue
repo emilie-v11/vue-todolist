@@ -1,15 +1,15 @@
 <script setup>
-import { ref } from 'vue'
+import { reactive } from 'vue'
 
 let id = 0
 
-const newTask = ref({
+const newTask = reactive({
   text: '',
   day: '',
   reminder: false
 })
 
-const tasks = ref([
+const tasks = reactive([
   {
     id: id++,
     text: 'Doctors Appointment',
@@ -31,22 +31,22 @@ const tasks = ref([
 ])
 
 function addTask() {
-  tasks.value.push({ ...newTask, id: id++ })
+  tasks.push({ ...newTask, id: id++ })
 }
 
 function deleteTask(removeTask) {
-  tasks.value = tasks.value.filter((task) => task !== removeTask)
+  tasks.filter((task) => task !== removeTask)
 }
 
 const onSubmit = () => {
-  if (!newTask.value.text) {
+  if (!newTask.text) {
     alert('Please add a task')
     return
   }
   addTask()
-  newTask.value.text = ''
-  newTask.value.day = ''
-  newTask.value.reminder = false
+  newTask.text = ''
+  newTask.day = ''
+  newTask.reminder = false
 }
 </script>
 
@@ -70,6 +70,7 @@ const onSubmit = () => {
           <label for="reminder">Set Reminder</label>
           <input type="checkbox" v-model="newTask.reminder" />
         </div>
+        <input class="btn btn-block" type="submit" />
       </form>
       <ul class="tasks">
         <li
