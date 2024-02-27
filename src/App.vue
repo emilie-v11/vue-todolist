@@ -80,6 +80,7 @@ const onSubmit = () => {
         <input class="btn btn-block" type="submit" />
       </form>
       <ul class="tasks">
+        <p v-if="tasks.length === 0">No tasks to show</p>
         <li
           class="task"
           v-for="task in tasks"
