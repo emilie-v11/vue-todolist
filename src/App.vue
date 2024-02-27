@@ -31,7 +31,7 @@ const tasks = ref([
 ])
 
 function addTask() {
-  tasks.value.push({ ...newTask.value, id: id++ })
+  tasks.value = [...tasks.value, { ...newTask.value, id: id++ }]
 }
 
 function deleteTask(removeTaskId) {
