@@ -3,12 +3,14 @@
 </script>
 
 <template>
-  <header>
-  </header>
+  <div class="container">
+    <header class="header">
+      <h1>Task tracker</h1>
+      <button class="btn">Add</button>
+    </header>
 
-  <main>
-  </main>
+    <main></main>
+  </div>
 </template>
 
-<style scoped>
-</style>
+<style scoped></style>
