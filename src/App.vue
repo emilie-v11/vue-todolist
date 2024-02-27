@@ -2,6 +2,7 @@
 import { ref } from 'vue'
 
 let id = 0
+const showAddTask = ref(false)
 
 const newTask = ref({
   text: '',
@@ -61,10 +62,12 @@ const onSubmit = () => {
   <div class="container">
     <header class="header">
       <h1>Task tracker</h1>
-      <button class="btn">Add</button>
+      <button class="btn" @click="showAddTask = !showAddTask" :style="{backgroundColor: showAddTask ? 'red' : 'green' }">
+        {{ showAddTask ? 'Close Form' : 'Add Task' }}
+      </button>
     </header>
     <main>
-      <form class="add-form" @submit.prevent="onSubmit">
+      <form class="add-form" v-show="showAddTask" @submit.prevent="onSubmit">
         <div class="form-control">
           <label for="task">Task</label>
           <input type="text" v-model="newTask.text" />
@@ -86,7 +89,7 @@ const onSubmit = () => {
           v-for="task in tasks"
           :key="task.id"
           :class="task.reminder ? 'reminder' : ''"
-          @dblclick="() => (toggleReminder(task.id))"
+          @dblclick="() => toggleReminder(task.id)"
         >
           <div>
             <h3>{{ task.text }}</h3>
