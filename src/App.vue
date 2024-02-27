@@ -61,7 +61,7 @@ const onSubmit = () => {
   <div class="container">
     <header class="header">
       <h1>Task tracker</h1>
-      <button class="btn" @click="addTask">Add</button>
+      <button class="btn">Add</button>
     </header>
     <main>
       <form class="add-form" @submit.prevent="onSubmit">
