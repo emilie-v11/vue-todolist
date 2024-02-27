@@ -29,7 +29,12 @@ const tasks = reactive([
       <h1>Task tracker</h1>
       <button class="btn">Add</button>
     </header>
-    <main></main>
+    <main>
+      <div class="task" v-for="task in tasks" :key="task.id" :class="task.reminder ?'reminder' : ''">
+        <h3>{{ task.text }}</h3>
+        <p>{{ task.day }}</p>
+      </div>
+    </main>
   </div>
 </template>
 
