@@ -1,5 +1,5 @@
 <script setup>
-import { ref, watchEffect } from 'vue'
+import { ref } from 'vue'
 import Header from './components/Header.vue'
 import FormAddTask from './components/FormAddTask.vue'
 
@@ -26,9 +26,6 @@ const tasks = ref([
     reminder: false
   }
 ])
-watchEffect(() => {
-  console.log(tasks.value)
-})
 
 function addTask(newTask) {
   tasks.value = [...tasks.value, { id: id++, ...newTask }]
