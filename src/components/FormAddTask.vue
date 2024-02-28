@@ -42,4 +42,35 @@ const onSubmit = () => {
   </form>
 </template>
 
-<style scoped></style>
+<style scoped>
+.add-form {
+  margin-bottom: 40px;
+}
+.form-control {
+  margin: 20px 0;
+}
+.form-control label {
+  display: block;
+}
+.form-control input {
+  width: 100%;
+  height: 40px;
+  margin: 5px;
+  padding: 3px 7px;
+  font-size: 17px;
+}
+.form-control-check {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  justify-content: flex-end;
+}
+.form-control-check label {
+  margin-left: 10px;
+}
+.form-control-check input {
+  width: 20px;
+  height: 20px;
+}
+
+</style>
