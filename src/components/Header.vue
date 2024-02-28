@@ -11,7 +11,9 @@ const emit = defineEmits(['toggle-add-task'])
 <template>
   <header class="header">
     <h1>{{ title }}</h1>
-    <Button @btn-click="emit('toggle-add-task')" :color="showAddTask ? 'red' : 'green'" :textBtn="showAddTask ? 'Close Form' : 'Add Task'"></Button>
+    <Button @btn-click="emit('toggle-add-task')" :color="showAddTask ? 'red' : 'green'" :textBtn="showAddTask ? 'Close Form' : 'Add Task'"
+    :type="'button'"
+    class="btn-toogle-form"></Button>
   </header>
 </template>
 
