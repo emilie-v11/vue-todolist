@@ -1,5 +1,6 @@
 <script setup>
 import { ref } from 'vue'
+import Header from './components/Header.vue'
 
 let id = 0
 const showAddTask = ref(false)
@@ -45,6 +46,10 @@ function toggleReminder(id) {
   )
 }
 
+function toggleShowAddTask() {
+  showAddTask.value = !showAddTask.value
+}
+
 const onSubmit = () => {
   if (!newTask.value.text) {
     alert('Please add a task')
@@ -60,12 +65,7 @@ const onSubmit = () => {
 
 <template>
   <div class="container">
-    <header class="header">
-      <h1>Task tracker</h1>
-      <button class="btn" @click="showAddTask = !showAddTask" :style="{backgroundColor: showAddTask ? 'red' : 'green' }">
-        {{ showAddTask ? 'Close Form' : 'Add Task' }}
-      </button>
-    </header>
+    <Header :toggleShowAddTask="toggleShowAddTask" :showAddTask="showAddTask"></Header>
     <main>
       <form class="add-form" v-show="showAddTask" @submit.prevent="onSubmit">
         <div class="form-control">
@@ -102,4 +102,26 @@ const onSubmit = () => {
   </div>
 </template>
 
-<style scoped></style>
+<style>
+.btn {
+  display: inline-block;
+  background: #000;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  margin: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+  text-decoration: none;
+  font-size: 15px;
+  font-family: inherit;
+}
+
+/* .btn:focus {
+  outline: none;
+} */
+
+.btn:active {
+  transform: scale(0.98);
+}
+</style>
