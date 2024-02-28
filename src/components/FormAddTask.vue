@@ -16,6 +16,7 @@ const onSubmit = () => {
     return
   }
   emit('add-task', { ...newTask.value })
+  
   console.log(newTask.value)
 
   newTask.value.text = ''

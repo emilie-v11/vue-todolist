@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, watchEffect } from 'vue'
 import Header from './components/Header.vue'
 import FormAddTask from './components/FormAddTask.vue'
 
@@ -26,6 +26,9 @@ const tasks = ref([
     reminder: false
   }
 ])
+watchEffect(() => {
+  console.log(tasks.value)
+})
 
 function addTask(newTask) {
   tasks.value = [...tasks.value, { id: id++, ...newTask }]
@@ -75,4 +78,14 @@ function toggleAddTask() {
   </div>
 </template>
 
-<style></style>
+<style>
+.container {
+  max-width: 500px;
+  margin: 30px auto;
+  overflow: auto;
+  min-height: 300px;
+  border: 1px solid steelblue;
+  padding: 30px;
+  border-radius: 5px;
+}
+</style>
