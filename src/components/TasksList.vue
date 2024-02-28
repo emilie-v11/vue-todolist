@@ -1,4 +1,5 @@
 <script setup>
+import TaskItem from './TaskItem.vue'
 const { tasks } = defineProps({
   tasks: Array
 })
@@ -8,21 +9,15 @@ const emit = defineEmits(['delete-task', 'toggle-reminder'])
 <template>
   <ul class="tasks">
     <p v-if="tasks.length === 0">No tasks to show</p>
-    <li
-      v-else
+    <TaskItem
       v-for="task in tasks"
-      class="task"
       :key="task.id"
-      :class="task.reminder ? 'reminder' : ''"
-      @dblclick="emit('toggle-reminder', task.id)"
-    >
-      <div>
-        <h3>{{ task.text }}</h3>
-        <p>{{ task.day }}</p>
-      </div>
-      <button type="button" class="btn-delete" @click="emit('delete-task', task.id)">❌</button>
-    </li>
+      :task="task"
+      @delete-task="emit('delete-task', $event)"
+      @toggle-reminder="emit('toggle-reminder', $event)"
+    />
   </ul>
 </template>
 
-<style scoped></style>
+<style scoped>
+</style>
