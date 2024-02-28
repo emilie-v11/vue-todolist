@@ -1,13 +1,13 @@
 <script setup>
-defineProps(['toggleShowAddTask', 'showAddTask'])
+defineProps(['showAddTask', 'title'])
 </script>
 
 <template>
   <header class="header">
-    <h1>Task tracker</h1>
+    <h1>{{ title }}</h1>
     <button
       class="btn"
-      @click="toggleShowAddTask"
+      @click="$emit('toggle-add-task')"
       :style="{ backgroundColor: showAddTask ? 'red' : 'green' }"
     >
       {{ showAddTask ? 'Close Form' : 'Add Task' }}
@@ -22,5 +22,4 @@ defineProps(['toggleShowAddTask', 'showAddTask'])
   align-items: center;
   margin-bottom: 20px;
 }
-
 </style>

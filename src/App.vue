@@ -46,7 +46,7 @@ function toggleReminder(id) {
   )
 }
 
-function toggleShowAddTask() {
+function toggleAddTask() {
   showAddTask.value = !showAddTask.value
 }
 
@@ -65,7 +65,8 @@ const onSubmit = () => {
 
 <template>
   <div class="container">
-    <Header :toggleShowAddTask="toggleShowAddTask" :showAddTask="showAddTask"></Header>
+    <Header 
+    @toggle-add-task="toggleAddTask" :showAddTask="showAddTask" title="Task tracker"></Header>
     <main>
       <form class="add-form" v-show="showAddTask" @submit.prevent="onSubmit">
         <div class="form-control">
