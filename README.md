@@ -13,6 +13,10 @@ The application is not yet fully accessible. It will be improved at a later date
 - **Delete Tasks**: Remove tasks that you have completed or are no longer necessary.
 - **Toggle Task Completion**: Double click on a task to mark it as completed or incomplete.
 
+<kbd>![Todolist form closed](./src/assets/images/todolist1.png)</kbd>
+
+<kbd>![Todolist form openned](./src/assets/images/todolist2.png)</kbd>
+
 ## Feature to Come: Accessibility Enhancements
 
 One of my main goals moving forward is to enhance the accessibility of the Vue ToDoList application. I recognize the importance of creating web applications that are inclusive and usable for everyone, including people with disabilities.
