@@ -1,17 +1,24 @@
 <script setup>
-defineProps(['showAddTask', 'title'])
+import Button from './Button.vue'
+
+const { showAddTask, title } = defineProps({
+  showAddTask: Boolean,
+  title: String
+})
+const emit = defineEmits(['toggle-add-task'])
 </script>
 
 <template>
   <header class="header">
     <h1>{{ title }}</h1>
-    <button
+    <Button @btn-click="emit('toggle-add-task')" :color="showAddTask ? 'red' : 'green'" :textBtn="showAddTask ? 'Close Form' : 'Add Task'"></Button>
+    <!-- <button
       class="btn"
       @click="$emit('toggle-add-task')"
       :style="{ backgroundColor: showAddTask ? 'red' : 'green' }"
     >
       {{ showAddTask ? 'Close Form' : 'Add Task' }}
-    </button>
+    </button> -->
   </header>
 </template>
 
