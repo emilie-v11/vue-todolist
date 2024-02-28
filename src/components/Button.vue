@@ -13,6 +13,3 @@ const emit = defineEmits(['btn-click'])
 </template>
 
 <style></style>
-
-<!-- :style="{ backgroundColor: showAddTask ? 'red' : 'green' }" -->
-<!-- {{ showAddTask ? 'Close Form' : 'Add Task' }} -->
