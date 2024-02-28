@@ -2,6 +2,7 @@
 import { ref } from 'vue'
 import Header from './components/Header.vue'
 import FormAddTask from './components/FormAddTask.vue'
+import TasksList from './components/TasksList.vue'
 import Footer from './components/Footer.vue'
 
 let id = 0
@@ -56,22 +57,11 @@ function toggleAddTask() {
     ></Header>
     <main>
       <FormAddTask v-show="showAddTask" @add-task="addTask"></FormAddTask>
-      <p v-if="tasks.length === 0">No tasks to show</p>
-      <ul class="tasks">
-        <li
-          class="task"
-          v-for="task in tasks"
-          :key="task.id"
-          :class="task.reminder ? 'reminder' : ''"
-          @dblclick="() => toggleReminder(task.id)"
-        >
-          <div>
-            <h3>{{ task.text }}</h3>
-            <p>{{ task.day }}</p>
-          </div>
-          <button type="button" class="btn-delete" @click="deleteTask(task.id)">❌</button>
-        </li>
-      </ul>
+      <TasksList
+        :tasks="tasks"
+        @delete-task="deleteTask"
+        @toggle-reminder="toggleReminder"
+      ></TasksList>
     </main>
     <Footer v-if="tasks.length > 0" :content="'💡 Double click on a task to toggle reminder'">
     </Footer>
