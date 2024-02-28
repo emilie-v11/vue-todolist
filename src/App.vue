@@ -1,16 +1,10 @@
 <script setup>
 import { ref } from 'vue'
 import Header from './components/Header.vue'
-import Button from './components/Button.vue';
+import FormAddTask from './components/FormAddTask.vue'
 
 let id = 0
 const showAddTask = ref(false)
-
-const newTask = ref({
-  text: '',
-  day: '',
-  reminder: false
-})
 
 const tasks = ref([
   {
@@ -33,8 +27,8 @@ const tasks = ref([
   }
 ])
 
-function addTask() {
-  tasks.value = [...tasks.value, { ...newTask.value, id: id++ }]
+function addTask(newTask) {
+  tasks.value = [...tasks.value, { id: id++, ...newTask }]
 }
 
 function deleteTask(removeTaskId) {
@@ -50,42 +44,19 @@ function toggleReminder(id) {
 function toggleAddTask() {
   showAddTask.value = !showAddTask.value
 }
-
-const onSubmit = () => {
-  if (!newTask.value.text) {
-    alert('Please add a task')
-    return
-  }
-  addTask()
-
-  newTask.value.text = ''
-  newTask.value.day = ''
-  newTask.value.reminder = false
-}
 </script>
 
 <template>
   <div class="container">
-    <Header 
-    @toggle-add-task="toggleAddTask" :showAddTask="showAddTask" title="Task tracker"></Header>
+    <Header
+      @toggle-add-task="toggleAddTask"
+      :showAddTask="showAddTask"
+      title="Task tracker"
+    ></Header>
     <main>
-      <form class="add-form" v-show="showAddTask" @submit.prevent="onSubmit">
-        <div class="form-control">
-          <label for="task">Task</label>
-          <input type="text" v-model="newTask.text" />
-        </div>
-        <div class="form-control">
-          <label for="day">Day & Time</label>
-          <input type="text" v-model="newTask.day" />
-        </div>
-        <div class="form-control form-control-check">
-          <label for="reminder">Set Reminder</label>
-          <input type="checkbox" v-model="newTask.reminder" />
-        </div>
-        <Button class="btn-block" :textBtn="'Send'" :type="'submit'"></Button>
-      </form>
+      <FormAddTask v-show="showAddTask" @add-task="addTask"></FormAddTask>
+      <p v-if="tasks.length === 0">No tasks to show</p>
       <ul class="tasks">
-        <p v-if="tasks.length === 0">No tasks to show</p>
         <li
           class="task"
           v-for="task in tasks"
@@ -104,5 +75,4 @@ const onSubmit = () => {
   </div>
 </template>
 
-<style>
-</style>
+<style></style>
