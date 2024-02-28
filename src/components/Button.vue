@@ -4,11 +4,10 @@ const { color, textBtn, type } = defineProps({
   textBtn: String,
   type: String,
 })
-const emit = defineEmits(['btn-click'])
 </script>
 
 <template>
-  <button :type="type" class="btn" @click="emit('btn-click')" :style="{ backgroundColor: color }">
+  <button :type="type" class="btn" :style="{ backgroundColor: color }">
     {{ textBtn }}
   </button>
 </template>

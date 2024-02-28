@@ -15,9 +15,8 @@ const emit = defineEmits(['delete-task', 'toggle-reminder'])
       :task="task"
       @delete-task="emit('delete-task', $event)"
       @toggle-reminder="emit('toggle-reminder', $event)"
-    />
+    ></TaskItem>
   </ul>
 </template>
 
-<style scoped>
-</style>
+<style scoped></style>

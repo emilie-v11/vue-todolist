@@ -63,8 +63,10 @@ function toggleAddTask() {
         @toggle-reminder="toggleReminder"
       ></TasksList>
     </main>
-    <Footer v-if="tasks.length > 0" :content="'💡 Double click on a task to toggle reminder'">
-    </Footer>
+    <Footer
+      v-if="tasks.length > 0"
+      :content="'💡 Double click on a task to toggle reminder'"
+    ></Footer>
   </div>
 </template>
 
