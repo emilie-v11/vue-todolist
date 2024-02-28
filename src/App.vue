@@ -2,6 +2,7 @@
 import { ref } from 'vue'
 import Header from './components/Header.vue'
 import FormAddTask from './components/FormAddTask.vue'
+import Footer from './components/Footer.vue'
 
 let id = 0
 const showAddTask = ref(false)
@@ -72,9 +73,8 @@ function toggleAddTask() {
         </li>
       </ul>
     </main>
-    <footer v-if="tasks.length > 0">
-      <p>💡 Double click on a task to toggle reminder</p>
-    </footer>
+    <Footer v-if="tasks.length > 0" :content="'💡 Double click on a task to toggle reminder'">
+    </Footer>
   </div>
 </template>
 
@@ -87,10 +87,5 @@ function toggleAddTask() {
   border: 1px solid steelblue;
   padding: 30px;
   border-radius: 5px;
-}
-footer {
-  margin-top: 30px;
-  text-align: left;
-  font-size: small;
 }
 </style>
