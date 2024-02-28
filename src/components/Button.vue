@@ -30,4 +30,8 @@ const emit = defineEmits(['btn-click'])
 .btn:active {
   transform: scale(0.98);
 }
+.btn-block {
+  display: block;
+  width: 100%;
+}
 </style>

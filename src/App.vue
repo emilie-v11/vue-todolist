@@ -1,6 +1,7 @@
 <script setup>
 import { ref } from 'vue'
 import Header from './components/Header.vue'
+import Button from './components/Button.vue';
 
 let id = 0
 const showAddTask = ref(false)
@@ -81,7 +82,7 @@ const onSubmit = () => {
           <label for="reminder">Set Reminder</label>
           <input type="checkbox" v-model="newTask.reminder" />
         </div>
-        <input class="btn btn-block" type="submit" />
+        <Button class="btn-block" :textBtn="'Send'" :type="'submit'"></Button>
       </form>
       <ul class="tasks">
         <p v-if="tasks.length === 0">No tasks to show</p>
@@ -104,25 +105,4 @@ const onSubmit = () => {
 </template>
 
 <style>
-.btn {
-  display: inline-block;
-  background: #000;
-  color: #fff;
-  border: none;
-  padding: 10px 20px;
-  margin: 5px;
-  border-radius: 5px;
-  cursor: pointer;
-  text-decoration: none;
-  font-size: 15px;
-  font-family: inherit;
-}
-
-/* .btn:focus {
-  outline: none;
-} */
-
-.btn:active {
-  transform: scale(0.98);
-}
 </style>
