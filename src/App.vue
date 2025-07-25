@@ -3,6 +3,7 @@ import Header from './components/Header.vue'
 import FormAddTask from './components/FormAddTask.vue'
 import TasksList from './components/TasksList.vue'
 import Footer from './components/Footer.vue'
+import tasksApi from "@/api/tasks-api"
 
 import { onMounted, ref } from 'vue'
 
@@ -13,38 +14,9 @@ function toggleAddTask() {
   showAddTask.value = !showAddTask.value
 };
 
-async function fetchTasks() {
-  try {
-    const response = await fetch('api/tasks');
-    if (!response.ok) {
-      throw new Error('Network response was not ok');
-    }
-    tasks.value = await response.json();
-  } catch (error) {
-    console.error('Failed to fetch tasks:', error);
-  }
-};
-
-async function fetchTaskById(id) {
-  try {
-    const response = await fetch(`api/tasks/${id}`);
-    if (!response.ok) {
-      throw new Error('Network response was not ok');
-    }
-    return await response.json();
-  } catch (error) {
-    console.error('Failed to fetch task:', error);
-  }
-};
-
 async function addTask(newTask) {
   try {
-    const response = await fetch('api/tasks', {
-      method: 'POST',
-      headers: { 'Content-type': 'application/json' },
-      body: JSON.stringify(newTask),
-    });
-    const dataNewTask = await response.json();
+    const dataNewTask = await tasksApi.createTask(newTask);
     tasks.value = [...tasks.value, dataNewTask];
     showAddTask.value = false;
   } catch (error) {
@@ -55,20 +27,14 @@ async function addTask(newTask) {
 
 async function deleteTask(removeTaskId) {
   try {
-    const taskToDelete = await fetchTaskById(removeTaskId);
+    const taskToDelete = await tasksApi.getTaskById(removeTaskId);
     if (!taskToDelete) {
       console.error(`Task with ID ${removeTaskId} not found.`);
       return;
     }
     const userConfirmed = confirm(`Are you sure you want to delete "${taskToDelete.text}"?`);
     if (!userConfirmed) return;
-    const response = await fetch(`api/tasks/${removeTaskId}`, {
-      method: 'DELETE',
-    });
-    if (!response.ok) {
-      console.error(`Failed to delete task. Server responded with: ${response.status} ${response.statusText}`);
-      return;
-    }
+    await tasksApi.deleteTask(removeTaskId);
     tasks.value = tasks.value.filter((task) => task.id !== removeTaskId);
 
   } catch (error) {
@@ -77,17 +43,12 @@ async function deleteTask(removeTaskId) {
 };
 
 async function toggleReminder(id) {
-  const taskToToggle = await fetchTaskById(id);
-  const updatedTask = { ...taskToToggle, reminder: !taskToToggle.reminder };
   try {
-    const response = await fetch(`api/tasks/${id}`, {
-      method: 'PUT',
-      headers: { 'Content-type': 'application/json' },
-      body: JSON.stringify(updatedTask),
-    });
-    const data = await response.json();
+    const taskToToggle = await tasksApi.getTaskById(id);
+    const updatedTask = { ...taskToToggle, reminder: !taskToToggle.reminder };
+    const { reminder} = await tasksApi.updateTask(updatedTask)
     tasks.value = tasks.value.map((task) =>
-      task.id === id ? { ...task, reminder: data.reminder } : task
+      task.id === id ? { ...task, reminder } : task
     );
   } catch (error) {
     console.error('Failed to toggle reminder:', error);
@@ -95,7 +56,7 @@ async function toggleReminder(id) {
 };
 
 onMounted(async () => {
-  await fetchTasks();
+  tasks.value = await tasksApi.getTasks();
 });
 </script>
 
